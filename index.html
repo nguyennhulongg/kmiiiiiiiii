@@ -159,6 +159,7 @@
       <div class="btn-group">
         <button id="btn-yes" onclick="sayYes()">Cóaa 🤍</button>
         <button id="btn-no"  onclick="sayNo()">Khom 🙈</button>
+        <span id="no-dead" style="display:none; font-size:0.95rem; color:#e07aaa; font-style:italic;">Hết lựa chọn òiiiii =)))</span>
       </div>
     </div>
 
@@ -205,10 +206,12 @@
       const yesFsize = Math.min(1.1 + noCount * 0.18, 2.2);
 
       btnNo.style.transform  = `scale(${noScale})`;
-      btnNo.style.opacity    = noScale < 0.3 ? noScale * 2 : '1';
-      if (noScale <= 0.15) {
+      btnNo.style.opacity    = noScale < 0.35 ? String(noScale * 3) : '1';
+
+      if (noCount >= 5) {
         btnNo.style.pointerEvents = 'none';
         btnNo.style.opacity = '0';
+        document.getElementById('no-dead').style.display = 'inline';
       }
 
       btnYes.style.padding   = `${yesPad}px ${yesPad * 2.2}px`;
