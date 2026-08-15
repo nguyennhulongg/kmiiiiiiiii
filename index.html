@@ -86,6 +86,7 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
+      overflow: hidden;
     }
 
     button {
@@ -104,6 +105,8 @@
       font-size: 1.1rem;
       padding: 14px 32px;
       box-shadow: 0 4px 20px rgba(255, 20, 147, 0.4);
+      max-width: 100%;
+      width: fit-content;
     }
 
     #btn-yes:hover {
@@ -172,7 +175,7 @@
     <!-- Success screen -->
     <div id="success">
       <span class="big-emoji">🥰</span>
-      <h2>Hứa sẽ không làm bé buồn nữa đâu 🤍</h2>
+      <h2>Hứa sẽ không làm bé giận nữa đâu 🤍</h2>
       <p>Cảm ơn bé đã tha lỗi cho anh 🥹</p>
     </div>
 
@@ -209,8 +212,8 @@
 
       // shrink "Không" button — min size so it vanishes
       const noScale  = Math.max(0.15, 1 - noCount * 0.12);
-      const yesPad   = 14 + noCount * 6;
-      const yesFsize = 1.1 + noCount * 0.18;
+      const yesPad   = Math.min(14 + noCount * 6, 36);
+      const yesFsize = Math.min(1.1 + noCount * 0.18, 2.2);
 
       btnNo.style.transform  = `scale(${noScale})`;
       btnNo.style.opacity    = noScale < 0.3 ? noScale * 2 : '1';
@@ -219,7 +222,10 @@
         btnNo.style.opacity = '0';
       }
 
-      // grow "Có" button
+      // grow "Có" button — cap padding và font để không tràn
+      const yesPad   = Math.min(14 + noCount * 6, 36);
+      const yesFsize = Math.min(1.1 + noCount * 0.18, 2.2);
+
       btnYes.style.padding   = `${yesPad}px ${yesPad * 2.2}px`;
       btnYes.style.fontSize  = `${yesFsize}rem`;
 
